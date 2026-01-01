@@ -1,5 +1,6 @@
-# tiny-kernel
-
-A minimal educational operating system kernel built from scratch.
-Designed to understand how software meets hardware.
-
+# mikanos
+Educational Operating System
+MikanOS: An Educational Operating System
+# Files
+- MikanLoaderPkg
+    - The MikanOS loader as a UEFI Application
