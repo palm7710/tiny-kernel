@@ -16,7 +16,7 @@ docker exec -it "$CONTAINER" bash -lc "cd /work/tiny-kernel && git pull"
 
 # Docker内でEDK2ビルド（Loader.efi生成）
 docker exec -it "$CONTAINER" bash -lc '
-set -euo pipefail
+set -eo pipefail
 cd /root/edk2
 source edksetup.sh
 build -p MikanLoaderPkg/MikanLoaderPkg.dsc -a X64 -t GCC5
