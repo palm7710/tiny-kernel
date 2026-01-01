@@ -7,9 +7,10 @@ EFI_STATUS EFIAPI UefiMain(
     )
 {
     // UEFIコンソールをクリア
+    SystemTable->ConOut->Reset(SystemTable->ConOut, TRUE);
     SystemTable->ConOut->ClearScreen(SystemTable->ConOut);
-    
+    SystemTable->ConOut->SetCursorPosition(SystemTable->ConOut, 0, 0);
     Print(L"Hello, Mikan World!\n");
-    return EFI_SUCCESS;
-
+    while (1) { __asm__ __volatile__("hlt"); } // CPUを無駄に回さず停止
+    // return EFI_SUCCESS;
 }
