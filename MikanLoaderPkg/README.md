@@ -5,6 +5,8 @@
 ```bash
 # docker run（今後の再開方法）
 docker start -ai mikanos-ubuntu
+# または
+docker exec -it mikanos-ubuntu bash
 
 # Ubuntuコンテナを起動（初回）
 mkdir -p ~/workspace/tiny-kernel
@@ -45,6 +47,8 @@ ls Build/MikanLoaderX64/DEBUG_GCC5/X64/Loader.efi
 ```bash
 # コンテナ起動
 docker start -ai mikanos-ubuntu
+# または
+docker exec -it mikanos-ubuntu bash
 
 # OVMF（UEFIファーム）を用意
 apt update
@@ -54,23 +58,15 @@ apt install -y ovmf qemu-system-x86
 mkdir -p /work/esp/EFI/BOOT
 cp /root/edk2/Build/MikanLoaderX64/DEBUG_GCC5/X64/Loader.efi /work/esp/EFI/BOOT/BOOTX64.EFI
 
-# QEMU を起動（画面あり）
-qemu-system-x86_64 \
-  -machine q35 \
-  -m 1024 \
-  -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE.fd \
-  -drive if=pflash,format=raw,file=/usr/share/OVMF/OVMF_VARS.fd \
-  -drive format=raw,file=fat:rw:/work/esp
-
 # GUIなしで起動
 cp /usr/share/OVMF/OVMF_VARS.fd /work/OVMF_VARS.fd
 
+# GUIありで起動（MacOSは、コンテナ外が現実的です）
 qemu-system-x86_64 \
   -machine q35 \
   -m 1024 \
-  -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE.fd \
-  -drive if=pflash,format=raw,file=/work/OVMF_VARS.fd \
-  -drive format=raw,file=fat:rw:/work/esp \
-  -nographic
+  -drive if=pflash,format=raw,readonly=on,file=/opt/homebrew/share/qemu/edk2-x86_64-code.fd \
+  -drive if=pflash,format=raw,file=$HOME/workspace/tiny-kernel/ovmf/edk2-x86_64-vars.fd \
+  -drive format=raw,file=fat:rw:$HOME/workspace/tiny-kernel/esp
 
 ```
