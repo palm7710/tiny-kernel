@@ -27,15 +27,12 @@ ansible-playbook -i ansible_inventory ansible_provision.yml
 
 # リポジトリ をビルド対象にする（初回）
 cd $HOME/edk2
-ln -s /work/MikanLoaderPkg ./
+ln -s /work/tiny-kernel/MikanLoaderPkg ./
 ls MikanLoaderPkg/Main.c
 
 # Loader.efi をビルド
 cd $HOME/edk2
 source edksetup.sh
 
-build \
-  -p MikanLoaderPkg/MikanLoaderPkg.dsc \
-  -a X64 \
-  -t GCC5
+build -p MikanLoaderPkg/MikanLoaderPkg.dsc -a X64 -t GCC5
 ```

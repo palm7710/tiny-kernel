@@ -22,6 +22,9 @@
     DebugLib|MdePkg/Library/BaseDebugLibNull/BaseDebugLibNull.inf
   !endif  ## DEBUG_ENABLE_OUTPUT
 
+  # 「どの実装を使うか」指定
+  RegisterFilterLib|MdePkg/Library/RegisterFilterLibNull/RegisterFilterLibNull.inf
+
 # UefiLib and its dependencies
   UefiLib|MdePkg/Library/UefiLib/UefiLib.inf
   PrintLib|MdePkg/Library/BasePrintLib/BasePrintLib.inf
